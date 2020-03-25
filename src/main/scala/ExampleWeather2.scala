@@ -25,10 +25,10 @@ object ExampleWeather2 extends App {
     //Calculate the average temperature in each record
     val rddAvgTempPerMonth = rddTempDataPerMonth.map({ case (k, v) => (k, v._1 / v._2) })
     //Sort, coalesce and cache the result(because it is used twice)
-    val rddResult = rddAvgTempPerMonth.sortByKey().coalesce(1)
+    val rddResult = rddAvgTempPerMonth.sortByKey().coalesce(1).cache
 
     //Save the RDD on HDFS; the directory should NOT exist
-    rddResult.saveAsTextFile("hdfs:/user/egallinucci/spark/avgTempPerMonth")
+    rddResult.saveAsTextFile("hdfs:/user/cforresi/spark/avgTempPerMonth")
   }
 
 }
